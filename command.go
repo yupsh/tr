@@ -3,16 +3,16 @@ package command
 import (
 	"strings"
 
-	yup "github.com/gloo-foo/framework"
+	gloo "github.com/gloo-foo/framework"
 )
 
-type command yup.Inputs[string, flags]
+type command gloo.Inputs[string, flags]
 
-func Tr(parameters ...any) yup.Command {
-	return command(yup.Initialize[string, flags](parameters...))
+func Tr(parameters ...any) gloo.Command {
+	return command(gloo.Initialize[string, flags](parameters...))
 }
 
-func (p command) Executor() yup.CommandExecutor {
+func (p command) Executor() gloo.CommandExecutor {
 	// Get set1 and set2 from positional arguments
 	set1 := ""
 	set2 := ""
@@ -23,7 +23,7 @@ func (p command) Executor() yup.CommandExecutor {
 		set2 = p.Positional[1]
 	}
 
-	return yup.LineTransform(func(line string) (string, bool) {
+	return gloo.LineTransform(func(line string) (string, bool) {
 		result := line
 
 		// Delete mode
